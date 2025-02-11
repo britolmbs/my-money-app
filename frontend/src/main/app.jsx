@@ -9,7 +9,7 @@ export default props => (
         <Header />
         <SideBar />
         <div className='content-wrapper'>
-            <Routes />
+        <Routes />
         </div>
         <Footer />
     </div>
