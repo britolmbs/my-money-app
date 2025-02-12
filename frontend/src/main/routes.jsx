@@ -8,6 +8,5 @@ export default props => (
     <Route path='/' component={Dashboard} />
     <Route path='/billingCycles' component={BillingCycle} />
     <Redirect from='*' to='/' />
-    
-        </Router> 
+     </Router> 
 )
