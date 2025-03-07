@@ -11,6 +11,7 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
+    "bcrypt": "^5.1.1",
     "admin-lte": "^4.0.0-beta3",
     "axios": "^1.7.9",
     "babel-core": "^6.26.3",
