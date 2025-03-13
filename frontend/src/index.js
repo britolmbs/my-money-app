@@ -7,6 +7,7 @@ import reducers from "./main/reducers"
 import promisse from 'redux-promise'
 import multi from 'redux-multi'
 import thunk from 'redux-thunk'
+import registerServiceWorker from './registerServiceWorker'
 
 const devTools = window.__REDUX_DEVTOOLS_EXTENSION__
 && window.__REDUX_DEVTOOLS_EXTENSION__()
@@ -16,3 +17,4 @@ ReactDOM.render(
         <Routes />
     </Provider>
 , document.getElementById('app'))
+registerServiceWorker()
