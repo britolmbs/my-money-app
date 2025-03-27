@@ -1,4 +1,4 @@
-const url = process.env.MONGODB_URI ? process.env.MONGODB_URI : 'mongodb://localhost/my-money'
+const url = process.env.connectionString ? process.env.connectionString : 'mongodb://localhost/my-money'
 const mongoose = require('mongoose')
 mongoose.Promise = global.Promise
 module.exports = mongoose.connect(url, { useNewUrlParse: true, useUnifiedTopology: true })
