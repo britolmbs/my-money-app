@@ -1,10 +1,26 @@
-require('dotenv').config();
-const url = process.env.CONNECTION_STRING || 'mongodb://localhost/my-money';
+
+const path = require('path');
+const dotenv = require('dotenv');
+
+
+dotenv.config({ path: path.resolve(__dirname, '../.env') });
+
+require('dotenv').config({ path: '../.env' });
+
+
 const mongoose = require('mongoose')
 mongoose.Promise = global.Promise
-module.exports = mongoose.connect(url)
+
+const url = process.env.MONGODB_URI
+
+mongoose.connect(url, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+})
+
+
 
 mongoose.Error.messages.general.required = "O atributo '{PATH}' é obrigatório."
-mongoose.Error.messages.Number.min = "O '{VALUE}' iformado é menor que o limite mínmo de '{MIN}'."
-mongoose.Error.messages.Number.max = "O '{VALUE}' informado é maior que o limite máximo de '{MAX}'"
+mongoose.Error.messages.Number.min = "O '{VALUE}' informado é menor que o limite mínimo de '{MIN}'."
+mongoose.Error.messages.Number.max = "O '{VALUE}' informado é maior que o limite máximo de '{MAX}'."
 mongoose.Error.messages.String.enum = "'{VALUE}' não é válido para o atributo '{PATH}'."
