@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "src/loader.js",
   "scripts": {
-    "dev": "nodemon",
+    "start": "node src/loader.js",
+    "dev": "nodemon ",
     "production": "pm2 start src/loader.js --name my-money-backend"
   },
   "keywords": [],

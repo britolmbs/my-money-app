@@ -2,7 +2,7 @@ const _ = require('lodash')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 const User = require('./user')
-const env = require('../../.env')
+const authSecret = 'mysecret'
 const user = require('./user')
 
 const emailRegex = /\S+@\S+\.\S+/
@@ -22,20 +22,20 @@ const login = (req, res, next) => {
         if(err) {
             return sendErrorsFromDB(res, err)
         } else if ( user && bcrypt.compareSync(password, user.password)) {
-            const token = jwt.sign({ ...user }, env.authSecret, {
-                expiresIn: "1 day"
+            const token = jwt.sign({ ...user }, "s3cr3t", {
+                expiresIn: '1 day'
             })
             const { name, email } = user
-            res.json({name, email, token}) 
+            res.json({name, email, token})
         } else {
             return res.status(400).send({errors: ['Usuário/Senha inválidos']})
-        }
+      }
     })
 }
 
 const validateToken = (req, res, next) => {
     const token = req.body.token || ''
-    jwt.verify(token, env.authSecret, function (err, decode) {
+    jwt.verify(token, authSecret, function (err, decode) {
         return res.status(200).send({ valid: !err})
     })
 }
@@ -54,7 +54,7 @@ const signup = (req, res, next) => {
         return res.status(400).send({
             errors: ["Senha precisar ter: uma letra maiúscula, uma letra minúscula, um número, uma caracter especial(@#$%) e tamanho entre 6-20"]
         })     
-    }
+      }
         const salt = bcrypt.genSaltSync()
         const passwordHash = bcrypt.hashSync(password, salt)
         if (!bcrypt.compareSync(confirmPassword, passwordHash)) {
@@ -81,4 +81,5 @@ const signup = (req, res, next) => {
 }
 
 module.exports = { login, signup, validateToken }
+
 
