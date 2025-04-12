@@ -1,4 +1,5 @@
-const url = process.env.connectionString ? process.env.connectionString : 'mongodb://localhost/my-money'
+require('dotenv').config();
+const url = process.env.CONNECTION_STRING || 'mongodb://localhost/my-money';
 const mongoose = require('mongoose')
 mongoose.Promise = global.Promise
 module.exports = mongoose.connect(url)
