@@ -11,27 +11,25 @@ import Messages from '../common/msg/messages'
 import Input from '../common/form/inputAuth'
 
 class Auth extends Component {
-    constructor(props) {
-        super(props)
-        this.state = { loginMode: true }
-    }
-
-changeMode() {
-    this.setState({ loginMode: !this.state.loginMode })
-}
-onSubmit(values) {
-    const { login, signup } = this.props
-    this.state.loginMode ? login(values) : signup(values) 
-}
+    state = { loginMode: true };
+  
+changeMode = () =>  {
+    this.setState(prevState => ({ loginMode: !this.state.loginMode }));
+};
+onSubmit = (values) =>  {
+    const { login, signup } = this.props;
+    this.state.loginMode ? login(values) : signup(values);
+};
 render() {
-    const { loginMode } = this.state
-    const { handleSubmit } = this.props
+    const { loginMode } = this.state;
+    const { handleSubmit } = this.props;
+
     return (
         <div className="login-box">
             <div className="login-logo"><b>My</b>Money</div>
             <div className="login-box-body">
                 <p className="login-box-msg">Bem Vindo!</p>
-                <form onSubmit={handleSubmit(v => this.onSubmit(v))}>
+                <form onSubmit={handleSubmit(this.onSubmit)}>
                     <Field component={Input} type='input' name='name'
                     placeholder='Nome' icon='user' hide={loginMode} />
                     <Field component={Input} type='email' name='email'
@@ -49,7 +47,7 @@ render() {
                     </Row>
                 </form>
                 <br />
-                <a onClick={() => this.changeMode()}>
+                <a onClick={this.changeMode}>
                     {loginMode ? 'Novo usuário? Registrar aqui!' : 'Já é Cadastrado? Entrar aqui!'}
                 </a>
             </div>
@@ -60,6 +58,4 @@ render() {
     }
 }
 
-Auth = reduxForm({form: 'authForm'})(Auth)
-const mapDispatchToProps = dispatch => bindActionCreators({ login, signup}, dispatch)
-export default connect(null, mapDispatchToProps)(Auth)
+export default connect(null, mapDispatchToProps)(reduxForm({ form: 'authForm'})(Auth));
