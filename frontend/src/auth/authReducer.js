@@ -1,22 +1,32 @@
-const userKey = '_mymoney_user'
+const userKey = '_mymoney_user';
+
 const INITIAL_STATE = {
     user: JSON.parse(localStorage.getItem(userKey)),
-    validToken: false
+    validToken: false,
 }
 
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case 'TOKEN_VALIDATED':
-            if(action.payload) {
-                return { ...state, validToken: true}
-            } else {
-                localStorage.removeItem(userKey)
-                return { ...state, validToken: false, user: null }
-            }
+           return action.payload ? { ...state, validToken: true} : { ...state, validToken: false, user: null, ...removeUserFromLocalStorage() };
+
             case 'USER_FETCHED':
-                localStorage.setItem(userKey, JSON.stringify(action.payload))
-                return { ...state, user: action.payload, validToken: true}
+                return {
+                    ...state,
+                    user: action.payload,
+                    validToken: true,
+                    ...saveUserToLocalStorage(action.payload)
+                };
                 default:
                     return state
     }
+}
+const removeUserFromLocalStorage = () => {
+    localStorage.removeItem(userKey);
+    return{};
+};
+
+const saveUserToLocalStorage =(user) =>{
+    localStorage.setItem(userKey, JSON.stringify(user));
+    return {};
 }

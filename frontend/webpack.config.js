@@ -14,7 +14,7 @@ module.exports = {
     },
 
     // Modo de desenvolvimento
-    mode: 'development',
+    mode: 'development', // Você pode mudar para 'production' quando necessário
 
     // Configurações do Dev Server
     devServer: {
@@ -30,6 +30,7 @@ module.exports = {
     resolve: {
         extensions: ['.js', '.jsx'],
         alias: {
+            '@': path.resolve(__dirname, 'src'), // Adicione esta linha para o alias
             modules: path.resolve(__dirname, 'node_modules'),
             jquery: path.resolve(__dirname, 'node_modules/admin-lte/plugins/jQuery/jquery-4.0.0-beta3.min.js'),
             bootstrap: path.resolve(__dirname, 'node_modules/admin-lte/bootstrap/js/bootstrap.js'),

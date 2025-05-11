@@ -1,2 +1,5 @@
-import jquery from 'jquery'
-window.$ = window.jQuery = jquery
+import jQuery from "jquery";
+
+if(typeof window !== 'undefined') {
+    window.$ = window.jQuery = jQuery;
+}

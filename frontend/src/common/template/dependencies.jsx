@@ -1,4 +1,4 @@
-import './jquery';
+import 'jquery';
 import 'admin-lte/plugins/jquery-ui/jquery-ui';
 import 'admin-lte/plugins/fastclick/fastclick';
 import 'admin-lte/plugins/slimScroll/jquery.slimscroll';
@@ -9,4 +9,4 @@ import 'admin-lte/bootstrap/css/bootstrap.css';
 import 'admin-lte/dist/css/adminlte.css';
 import 'admin-lte/dist/css/skins/_all-skins.css';
 import 'admin-lte/plugins/iCheck/flat/blue.css';
-import './custom.css';
+import 'src/assets/css/custom.css'; //
